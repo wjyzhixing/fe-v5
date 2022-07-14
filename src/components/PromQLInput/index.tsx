@@ -134,6 +134,7 @@ const ExpressionInput = ({ url, headers, value, onChange, executeQuery, readonly
             if (typeof onChange === 'function') {
               const val = update.state.doc.toString();
               if (val !== realValue.current) {
+                if (!val && !realValue.current) return; // 如果新旧值不相等，但是为空字符串或是 undefined 的话则认为值没有变化
                 realValue.current = val;
                 if (_.includes(validateTrigger, 'onChange')) {
                   onChange(val);
@@ -156,7 +157,7 @@ const ExpressionInput = ({ url, headers, value, onChange, executeQuery, readonly
       }
 
       // TODO: 不知道为什么要设置成自动获取焦点，因为某个地方有多处 promqlInput 这样会导致来回设置焦点
-      // view.focus();
+      view.focus();
     }
   }, [onChange, JSON.stringify(headers)]);
 
