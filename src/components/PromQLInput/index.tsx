@@ -183,6 +183,7 @@ const ExpressionInput = ({ url, headers, value, onChange, executeQuery, readonly
       onBlur={() => {
         if (typeof onChange === 'function') {
           if (realValue.current !== value) {
+            if (!value && !realValue.current) return; // 如果新旧值不相等，但是为空字符串或是 undefined 的话则认为值没有变化
             onChange(realValue.current);
           }
         }
@@ -191,6 +192,7 @@ const ExpressionInput = ({ url, headers, value, onChange, executeQuery, readonly
         if (e.code === 'Enter') {
           if (typeof onChange === 'function') {
             if (realValue.current !== value) {
+              if (!value && !realValue.current) return; // 如果新旧值不相等，但是为空字符串或是 undefined 的话则认为值没有变化
               onChange(realValue.current);
             }
           }
