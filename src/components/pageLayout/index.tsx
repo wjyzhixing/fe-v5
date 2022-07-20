@@ -26,6 +26,7 @@ import { CommonStoreState } from '@/store/commonInterface';
 import { Menu, Dropdown, Button } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Logout } from '@/services/login';
+import License from '@/pages/warning/strategy/license';
 interface IPageLayoutProps {
   icon?: ReactNode;
   title?: String | JSX.Element;
@@ -149,6 +150,7 @@ const PageLayout: React.FC<IPageLayoutProps> = ({ icon, title, rightArea,introIc
                   </Dropdown>
                 </div>
               )}
+              <License />
               {/* 文案完善了再打开 */}
               {/* <span
                 className='language'
