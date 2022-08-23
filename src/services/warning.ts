@@ -402,6 +402,7 @@ export const getBrainJobs = function (id) {
 export function getBrainLicense() {
   return request('/api/fc-brain/license', {
     method: RequestMethod.Get,
+    silence: true,
   });
 }
 

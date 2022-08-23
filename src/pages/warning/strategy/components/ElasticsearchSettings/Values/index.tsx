@@ -5,10 +5,18 @@ import _ from 'lodash';
 import { useDebounceFn } from 'ahooks';
 import { getFields } from '@/services/warning';
 
+interface IProps {
+  prefixName?: string[]; // 前缀字段名
+  listName?: string[]; // 列表字段名
+  cate: string;
+  cluster: string[];
+  index: string;
+}
+
 const alphabet = 'ABCDEFGHIGKLMNOPQRSTUVWXYZ'.split('');
 const functions = ['count', 'avg', 'sum', 'max', 'min', 'p90', 'p95', 'p99'];
 
-export default function index({ cate, cluster, index }) {
+export default function index({ prefixName = [], listName = ['query', 'values'], cate, cluster, index }: IProps) {
   const [search, setSearch] = useState('');
   const [fieldsOptions, setFieldsOptions] = useState([]);
   const { run } = useDebounceFn(
@@ -35,7 +43,7 @@ export default function index({ cate, cluster, index }) {
   }, [cate, _.join(cluster), index]);
 
   return (
-    <Form.List name={['query', 'values']}>
+    <Form.List name={listName}>
       {(fields, { add, remove }) => (
         <div>
           <div style={{ marginBottom: 8 }}>
@@ -59,7 +67,7 @@ export default function index({ cate, cluster, index }) {
                 </Form.Item>
                 <Form.Item shouldUpdate noStyle>
                   {({ getFieldValue }) => {
-                    const func = getFieldValue(['query', 'values', name, 'func']);
+                    const func = getFieldValue([...prefixName, ...listName, name, 'func']);
                     return (
                       <Row gutter={16}>
                         <Col flex='auto'>

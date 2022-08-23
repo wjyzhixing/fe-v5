@@ -53,6 +53,8 @@ function index(props: ModalWrapProps & IProps) {
   const handleAddChart = async () => {
     return chartForm.validateFields().then(async (values) => {
       // TODO: 渲染 hexbin 图时，colorRange 需要从 string 转换为 array
+      console.log('values', values);
+      return;
       if (type === 'hexbin') {
         _.set(values, 'custom.colorRange', _.split(values.custom.colorRange, ','));
       }
