@@ -50,7 +50,7 @@ export default function Prometheus({ chartForm }) {
                       <Col span={12}>
                         <Form.Item shouldUpdate={(prevValues, curValues) => _.isEqual(prevValues.datasourceName, curValues.datasourceName)} noStyle>
                           {({ getFieldValue }) => {
-                            return <IndexSelect prefixName={prefixName} cate={getFieldValue('datasourceCate')} cluster={[getFieldValue('datasourceName')]} />;
+                            return <IndexSelect prefixName={[name]} cate={getFieldValue('datasourceCate')} cluster={[getFieldValue('datasourceName')]} />;
                           }}
                         </Form.Item>
                       </Col>
@@ -64,7 +64,7 @@ export default function Prometheus({ chartForm }) {
                               </a>
                             </span>
                           }
-                          name={[...prefixName, 'query', 'filter']}
+                          name={[name, 'query', 'filter']}
                         >
                           <Input />
                         </Form.Item>
@@ -80,24 +80,24 @@ export default function Prometheus({ chartForm }) {
                         return (
                           <>
                             <Values
-                              prefixName={['targets']}
-                              listName={[name, 'query', 'values']}
+                              prefixFields={['targets']}
+                              prefixNameField={[name]}
                               cate={getFieldValue('datasourceCate')}
-                              cluster={getFieldValue('datasourceName')}
+                              cluster={[getFieldValue('datasourceName')]}
                               index={getFieldValue([...prefixName, 'query', 'index'])}
                             />
                             <GroupBy
-                              prefixName={['targets']}
-                              listName={[name, 'query', 'group_by']}
+                              prefixFields={['targets']}
+                              prefixNameField={[name, 'query', 'group_by']}
                               cate={getFieldValue('datasourceCate')}
-                              cluster={getFieldValue('datasourceName')}
+                              cluster={[getFieldValue('datasourceName')]}
                               index={getFieldValue([...prefixName, 'query', 'index'])}
                             />
                           </>
                         );
                       }}
                     </Form.Item>
-                    <Time prefixName={[name]} />
+                    <Time prefixNameField={[name]} />
                   </Panel>
                 );
               })}

@@ -30,7 +30,7 @@ import BarGauge from './BarGauge';
 import Text from './Text';
 import { IVariable } from '../../VariableConfig/definition';
 import Markdown from '../../Editor/Components/Markdown';
-import usePrometheus from '../datasource/usePrometheus';
+import useQuery from '../datasource/useQuery';
 import { IPanel } from '../../types';
 import { getStepByTimeAndStep } from '../../utils';
 import './style.less';
@@ -58,7 +58,7 @@ function index(props: IProps) {
   const values = _.cloneDeep(props.values);
   const ref = useRef<HTMLDivElement>(null);
   const [inViewPort] = useInViewport(ref);
-  const { series, loading } = usePrometheus({
+  const { series, loading } = useQuery({
     id,
     dashboardId,
     time,
@@ -66,6 +66,8 @@ function index(props: IProps) {
     targets: values.targets,
     variableConfig,
     inViewPort: isPreview || inViewPort,
+    datasourceCate: values.datasourceCate || 'prometheus',
+    datasourceName: values.datasourceName,
   });
   const tipsVisible = values.description || !_.isEmpty(values.links);
 

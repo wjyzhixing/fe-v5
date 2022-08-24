@@ -6,8 +6,8 @@ import { useDebounceFn } from 'ahooks';
 import { getFields } from '@/services/warning';
 
 interface IProps {
-  prefixName?: string[]; // 前缀字段名
-  listName?: string[]; // 列表字段名
+  prefixFields?: string[]; // 前缀字段名
+  prefixNameField?: string[]; // 列表字段名
   cate: string;
   cluster: string[];
   index: string;
@@ -16,7 +16,7 @@ interface IProps {
 const alphabet = 'ABCDEFGHIGKLMNOPQRSTUVWXYZ'.split('');
 const functions = ['count', 'avg', 'sum', 'max', 'min', 'p90', 'p95', 'p99'];
 
-export default function index({ prefixName = [], listName = ['query', 'values'], cate, cluster, index }: IProps) {
+export default function index({ prefixFields = [], prefixNameField = [], cate, cluster, index }: IProps) {
   const [search, setSearch] = useState('');
   const [fieldsOptions, setFieldsOptions] = useState([]);
   const { run } = useDebounceFn(
@@ -43,7 +43,7 @@ export default function index({ prefixName = [], listName = ['query', 'values'],
   }, [cate, _.join(cluster), index]);
 
   return (
-    <Form.List name={listName}>
+    <Form.List name={[...prefixNameField, 'query', 'values']}>
       {(fields, { add, remove }) => (
         <div>
           <div style={{ marginBottom: 8 }}>
@@ -67,7 +67,7 @@ export default function index({ prefixName = [], listName = ['query', 'values'],
                 </Form.Item>
                 <Form.Item shouldUpdate noStyle>
                   {({ getFieldValue }) => {
-                    const func = getFieldValue([...prefixName, ...listName, name, 'func']);
+                    const func = getFieldValue([...prefixFields, ...prefixNameField, 'query', 'values', name, 'func']);
                     return (
                       <Row gutter={16}>
                         <Col flex='auto'>
