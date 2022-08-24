@@ -88,7 +88,7 @@ export default async function query(options: IOptions) {
           name: target?.legend ? replaceExpressionBracket(target?.legend, serie.metric) : getSerieName(serie.metric),
           metric: serie.metric,
           expr: item.expr,
-          data: completeBreakpoints(step, serie.values),
+          data: completeBreakpoints(_step, serie.values),
         });
       });
     }
