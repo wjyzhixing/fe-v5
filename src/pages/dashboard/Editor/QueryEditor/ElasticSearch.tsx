@@ -50,7 +50,8 @@ export default function Prometheus({ chartForm }) {
                       <Col span={12}>
                         <Form.Item shouldUpdate={(prevValues, curValues) => _.isEqual(prevValues.datasourceName, curValues.datasourceName)} noStyle>
                           {({ getFieldValue }) => {
-                            return <IndexSelect prefixName={[name]} cate={getFieldValue('datasourceCate')} cluster={[getFieldValue('datasourceName')]} />;
+                            const datasourceName = getFieldValue('datasourceName') ? [getFieldValue('datasourceName')] : [];
+                            return <IndexSelect prefixName={[name]} cate={getFieldValue('datasourceCate')} cluster={datasourceName} />;
                           }}
                         </Form.Item>
                       </Col>
@@ -77,20 +78,22 @@ export default function Prometheus({ chartForm }) {
                       noStyle
                     >
                       {({ getFieldValue }) => {
+                        const datasourceName = getFieldValue('datasourceName') ? [getFieldValue('datasourceName')] : [];
                         return (
                           <>
                             <Values
                               prefixFields={['targets']}
                               prefixNameField={[name]}
                               cate={getFieldValue('datasourceCate')}
-                              cluster={[getFieldValue('datasourceName')]}
+                              cluster={datasourceName}
                               index={getFieldValue([...prefixName, 'query', 'index'])}
+                              valueRefVisible={false}
                             />
                             <GroupBy
                               prefixFields={['targets']}
                               prefixNameField={[name]}
                               cate={getFieldValue('datasourceCate')}
-                              cluster={[getFieldValue('datasourceName')]}
+                              cluster={datasourceName}
                               index={getFieldValue([...prefixName, 'query', 'index'])}
                             />
                           </>

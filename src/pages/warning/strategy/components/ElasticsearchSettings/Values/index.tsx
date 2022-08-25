@@ -11,12 +11,13 @@ interface IProps {
   cate: string;
   cluster: string[];
   index: string;
+  valueRefVisible?: boolean;
 }
 
 const alphabet = 'ABCDEFGHIGKLMNOPQRSTUVWXYZ'.split('');
 const functions = ['count', 'avg', 'sum', 'max', 'min', 'p90', 'p95', 'p99'];
 
-export default function index({ prefixFields = [], prefixNameField = [], cate, cluster, index }: IProps) {
+export default function index({ prefixFields = [], prefixNameField = [], cate, cluster, index, valueRefVisible = true }: IProps) {
   const [search, setSearch] = useState('');
   const [fieldsOptions, setFieldsOptions] = useState([]);
   const { run } = useDebounceFn(
@@ -74,7 +75,7 @@ export default function index({ prefixFields = [], prefixNameField = [], cate, c
                           <Row gutter={16}>
                             <Col span={func === 'count' ? 24 : 12}>
                               <Input.Group>
-                                <span className='ant-input-group-addon'>{alphabet[index]}</span>
+                                {valueRefVisible && <span className='ant-input-group-addon'>{alphabet[index]}</span>}
                                 <Form.Item name={[name, 'func']} noStyle>
                                   <Select style={{ width: '100%' }}>
                                     {functions.map((func) => (

@@ -23,7 +23,7 @@ export default async function query(options: IOptions) {
   let end = moment(parsedRange.end).unix();
   let batchParams: any[] = [];
   let series: any[] = [];
-  if (targets) {
+  if (targets && datasourceName) {
     _.forEach(targets, (target) => {
       const query = target.query || {};
       _.forEach(query?.values, (value) => {
