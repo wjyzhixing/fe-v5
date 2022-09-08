@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Radio, Space } from 'antd';
 import PageLayout from '@/components/pageLayout';
 import './index.less';
-import TimeSeriesSource from '@/Packages/Settings/pages/TimeSeriesSource';
+import TimeSeriesSource from '/Settings/pages/TimeSeriesSource';
 import EventSource from './EventSource';
 import LogSource from '@/Packages/Settings/pages/LogSource';
 import RadioButtons from '@/components/RadioButtons';

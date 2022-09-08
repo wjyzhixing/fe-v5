@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import { sourceLogoMap } from '@/components/DataSource/TimeSeriesSource/config';
 import { getDataSourcePluginList } from '@/components/DataSource/TimeSeriesSource/services';
 import SourceCards from '@/components/DataSource/components/SourceCards';
-
 import { DataSourceType } from '@/components/DataSource/TimeSeriesSource/types';
 import TableSource from '@/components/DataSource/components/TableSource';
 import TimeSeriesDetail from '@/components/DataSource/TimeSeriesSource/Detail';
+import Zabbix from './Detail/Zabbix';
+import Oracle from './Detail/Oracle';
+import Prometheus from '@/components/DataSource/TimeSeriesSource/Detail/Prometheus';
+import Mysql from './Detail/Mysql';
 
 export default function index() {
   const [pluginList, setPluginList] = useState();
@@ -27,6 +30,21 @@ export default function index() {
       );
     });
   }, []);
+
+  const detailContent = () => {
+    switch (data?.plugin_type) {
+      case 'zabbix':
+        return <Zabbix data={data} />;
+      case 'oracle':
+        return <Oracle data={data} />;
+      case 'prometheus':
+        return <Prometheus data={data} />;
+      case 'mysql':
+        return <Mysql data={data} />;
+      default:
+        return <div>无效的数据源类型：{data?.plugin_type}</div>;
+    }
+  };
 
   return (
     <div>
@@ -50,6 +68,7 @@ export default function index() {
           onClose={() => {
             setVisible(false);
           }}
+          detailContent={detailContent()}
         />
       )}
 

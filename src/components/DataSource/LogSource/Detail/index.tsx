@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Button, Drawer } from 'antd';
 import { Link } from 'react-router-dom';
 import { DataSourceType } from '../types';
 import './index.less';
-import Content from '@/Packages/Settings/pages/LogSource/Detail/Content';
-import { urlPrefix } from '@/Packages/Settings/pages/source';
+import { urlPrefix } from '../../TimeSeriesSource/config';
 interface Props {
   data: DataSourceType;
   visible: boolean;
   onClose: () => void;
+  detailContent: ReactNode;
 }
 export default function Index(props: Props) {
-  const { data, visible, onClose } = props;
+  const { data, visible, onClose, detailContent } = props;
 
   return (
     <Drawer
@@ -35,7 +35,8 @@ export default function Index(props: Props) {
       <div>
         <div className='page-title'>数据源名称</div>
         <div>{data.name}</div>
-        <Content data={data} />
+        {/* <Content data={data} /> */}
+        {detailContent}
         {data.description && (
           <>
             <div className='page-title'>备注</div>

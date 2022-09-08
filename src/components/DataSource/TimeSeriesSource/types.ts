@@ -1,5 +1,11 @@
-import { OracleSettingType } from '@/Packages/Settings/pages/TimeSeriesSource/Form/Oracle/types';
 import { FormInstance } from 'antd';
+
+export interface IProps {
+  type: string;
+  data: any;
+  onFinish: (values: any) => any;
+  submitLoading: boolean;
+}
 export interface IFromItemBaseProps {
   namePrefix: string[];
   type: string;
@@ -76,4 +82,24 @@ export interface IElasticSearchSettingType {
     'es.tls.skip_tls_verify'?: boolean;
   };
   'es.nodes'?: string[];
+}
+
+export interface OracleshardType {
+  'oracle.addr': string;
+  'oracle.db'?: string | string[];
+  'oracle.password': string;
+  'oracle.user': string;
+  'oracle.is_encrypt': boolean;
+}
+
+export interface OracletableType {
+  'oracle.table.op': string;
+  'oracle.table.source': string;
+  'oracle.table.target': string;
+}
+
+export interface OracleSettingType {
+  'oracle.method': string;
+  'oracle.shards': OracleshardType[];
+  'oracle.tables': OracletableType[];
 }

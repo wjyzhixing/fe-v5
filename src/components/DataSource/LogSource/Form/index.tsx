@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { message, Spin } from 'antd';
 import _ from 'lodash';
 import { useHistory, useParams } from 'react-router-dom';
@@ -6,11 +6,10 @@ import PageLayout from '@/components/pageLayout';
 import BreadCrumb from '@/components/BreadCrumb';
 import { getDataSourceDetailById, getDataSourcePluginList, submitRequest } from '@/components/DataSource/LogSource/services';
 import './index.less';
-import Content from '@/Packages/Settings/pages/LogSource/Form/Content';
-import { ESsourceType } from '@/Packages/Settings/pages/LogSource';
-import { urlPrefix } from '@/Packages/Settings/pages/source';
+import { ESsourceType, urlPrefix } from '../../TimeSeriesSource/config';
+import { IProps } from '../../TimeSeriesSource/types';
 
-export default function FormCpt() {
+export default function FormCpt(props: { renderContent: (data: IProps) => ReactNode }) {
   const history = useHistory();
   const { action, type, category, id } = useParams<{ action: string; type: string; category: string; id: string }>();
 
@@ -81,9 +80,7 @@ export default function FormCpt() {
         </div>
       }
     >
-      <div className='srm'>
-        {action === 'edit' && data === undefined ? <Spin spinning={true} /> : <Content data={data} type={type} onFinish={onFinish} submitLoading={submitLoading} />}
-      </div>
+      <div className='srm'>{action === 'edit' && data === undefined ? <Spin spinning={true} /> : props.renderContent({ data, type, onFinish, submitLoading })}</div>
     </PageLayout>
   );
 }

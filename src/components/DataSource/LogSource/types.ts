@@ -52,3 +52,8 @@ export interface PrometheusSettingType {
   'prometheus.password': string;
   'prometheus.user': string;
 }
+
+export interface IDefaultES {
+  default_id: number;
+  system_id: number;
+}

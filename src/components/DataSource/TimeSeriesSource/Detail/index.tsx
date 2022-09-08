@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Button, Drawer } from 'antd';
 import { Link } from 'react-router-dom';
 import './index.less';
 import Code from '@/components/Code';
 import { DataSourceType } from '@/components/DataSource/TimeSeriesSource/types';
-import Content from '@/Packages/Settings/pages/TimeSeriesSource/Detail/Content';
 import { urlPrefix } from '@/Packages/Settings/pages/source';
 
 interface Props {
   data: DataSourceType;
   visible: boolean;
   onClose: () => void;
+  detailContent: ReactNode;
 }
 export default function TimeSeriesDetail(props: Props) {
-  const { data, visible, onClose } = props;
+  const { data, visible, onClose, detailContent } = props;
 
   return (
     <Drawer
@@ -39,7 +39,7 @@ export default function TimeSeriesDetail(props: Props) {
         <div>{data.name}</div>
         <div className='page-title'>数据源ID</div>
         <Code>{data.id}</Code>
-        <Content data={data} />
+        {detailContent}
         {data.description && (
           <>
             <div className='page-title'>备注</div>

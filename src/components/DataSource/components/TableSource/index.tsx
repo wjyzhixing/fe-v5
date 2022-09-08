@@ -9,7 +9,8 @@ import type { SortableContainerProps, SortEnd } from 'react-sortable-hoc';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { kafkaOffsetReset, setDatasourceDefault } from '@/components/DataSource/LogSource/services';
 import LogPopover from '../LogPopover';
-import { ESsourceType, IDefaultES } from '@/Packages/Settings/pages/LogSource';
+import { IDefaultES } from '../../LogSource/types';
+import { ESsourceType } from '../../TimeSeriesSource/config';
 
 export interface IPropsType {
   pluginList?: {

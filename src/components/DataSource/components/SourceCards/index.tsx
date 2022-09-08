@@ -4,7 +4,7 @@ import { Row, Col, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import './index.less';
 import _ from 'lodash';
-import { urlPrefix } from '@/Packages/Settings/pages/source';
+import { urlPrefix } from '../../TimeSeriesSource/config';
 
 interface Props {
   sourceMap: any;

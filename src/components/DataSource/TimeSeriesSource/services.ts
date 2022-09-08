@@ -2,8 +2,7 @@ import request from '@/utils/request';
 import { RequestMethod } from '@/store/common';
 import { RSAEncrypt } from '@/utils';
 import _ from 'lodash';
-import { MysqlshardType, MysqlshardBaseType, MysqltableType } from './types';
-import { OracleshardType, OracletableType } from '../../../Packages/Settings/pages/TimeSeriesSource/Form/Oracle/types';
+import { MysqlshardType, MysqlshardBaseType, MysqltableType, OracleshardType, OracletableType } from './types';
 interface IItem {
   id: number;
   type: string;

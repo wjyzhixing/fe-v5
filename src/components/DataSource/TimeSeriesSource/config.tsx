@@ -1,5 +1,8 @@
 import React from 'react';
 
+export const urlPrefix = 'settings';
+export const ESsourceType = ['elasticsearch', 'tencent-es', 'aliyun-es'];
+
 export const sourceMap = [
   {
     logo: <img src={'/logos/prometheus_logo.svg'} alt='' className='prometheus_logo' width='46' />,
